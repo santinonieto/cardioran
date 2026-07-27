@@ -1,0 +1,12 @@
+# Configuración de despliegue en Netlify.
+# El adaptador de Next.js se instala solo: no hace falta declararlo acá.
+# next/image funciona sin configuración (usa el Image CDN de Netlify).
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Se fija la versión de Node para que el build sea reproducible
+  # y no cambie si Netlify actualiza su versión por defecto.
+  NODE_VERSION = "20"
