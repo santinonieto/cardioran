@@ -23,9 +23,12 @@ export default function Logo({
       alt="CARDIORAN · Salud Cardiovascular"
       width={width}
       height={Math.round((width * LOGO_H) / LOGO_W)}
-      // Indica el ancho real de render para que Next sirva la variante justa
-      // en lugar de una imagen mucho mayor.
-      sizes={`${width}px`}
+      // Se sirve el archivo tal cual, sin pasar por el optimizador de imágenes.
+      // El PNG ya está comprimido a mano con paleta de 64 colores (19,7 KB);
+      // al re-codificarlo, el optimizador lo agranda a 60-148 KB. Además, así
+      // las tres instancias (header, portada y pie) comparten una única URL
+      // y el navegador la descarga una sola vez.
+      unoptimized
       priority={priority}
       className={className}
     />
