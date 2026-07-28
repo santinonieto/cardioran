@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
-import { clinica } from "@/lib/data";
+import { clinica, doctor } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: `${clinica.nombre} · ${clinica.especialidad} · Concepción, Tucumán`,
     template: `%s · ${clinica.nombre}`,
   },
-  description: `${clinica.subtitulo} en Concepción, Tucumán. Dr. Ramiro Nieto. ${clinica.eslogan}.`,
+  description: `${clinica.subtitulo} en Concepción, Tucumán. ${doctor.nombre}. ${clinica.eslogan}.`,
 };
 
 export default function RootLayout({

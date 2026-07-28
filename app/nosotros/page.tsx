@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 };
 
 const valores = [
-  { titulo: "Cercanía", texto: "Una atención humana, con tiempo para escuchar a cada paciente." },
-  { titulo: "Prevención", texto: "El foco puesto en cuidar el corazón antes de que aparezcan los problemas." },
+  { titulo: "Cercanía", texto: "Un trato profesional y respetuoso, que construye una relación de confianza con cada paciente." },
+  { titulo: "Prevención", texto: "El foco puesto en cuidar el corazón antes de que aparezcan las patologías." },
   { titulo: "Claridad", texto: "Explicaciones sencillas sobre tu diagnóstico y tu tratamiento." },
 ];
 

@@ -3,10 +3,10 @@ import { clinica, doctor, servicios } from "@/lib/data";
 import Logo from "./components/Logo";
 
 const ventajas = [
-  { titulo: "Atención personalizada", texto: "Consultas sin apuro, con seguimiento cercano de cada paciente.", icono: "🤝" },
-  { titulo: "Estudios en el consultorio", texto: "Electrocardiograma, ecocardiograma, Holter y más, en un solo lugar.", icono: "🔬" },
-  { titulo: "Enfoque preventivo", texto: "Control de la presión y de los factores de riesgo cardiovascular.", icono: "🛡️" },
-  { titulo: "Turnos mañana y tarde", texto: "Horarios amplios de lunes a sábado para adaptarnos a vos.", icono: "🕐" },
+  { titulo: "Atención personalizada", texto: "Consultas con seguimiento cercano de cada paciente.", icono: "🤝" },
+  { titulo: "Estudios en el consultorio", texto: "Electrocardiograma, ecocardiograma Doppler, Holter y más, en un solo lugar.", icono: "🔬" },
+  { titulo: "Enfoque preventivo", texto: "Control de la presión arterial con MAPA (Monitoreo Ambulatorio de Presión Arterial) y de los factores de riesgo cardiovascular.", icono: "🛡️" },
+  { titulo: "Turnos por la tarde", texto: "Atención de lunes a viernes, de 18:00 a 21:30.", icono: "🕐" },
 ];
 
 export default function Home() {
@@ -163,7 +163,7 @@ export default function Home() {
         <div className="overflow-hidden rounded-3xl bg-brand-700 px-8 py-14 text-center text-white sm:px-16">
           <h2 className="text-3xl font-bold">¿Necesitás una consulta cardiológica?</h2>
           <p className="mx-auto mt-4 max-w-xl text-brand-100">
-            Escribinos por WhatsApp y coordinamos tu turno con el Dr. Ramiro Nieto en el
+            Escribinos por WhatsApp y coordinamos tu turno con el {doctor.nombre} en el
             horario que mejor te quede.
           </p>
           <a
