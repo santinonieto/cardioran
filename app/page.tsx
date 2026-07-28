@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { clinica, doctor, servicios } from "@/lib/data";
+import { clinica, doctor, preguntas, servicios } from "@/lib/data";
 import Logo from "./components/Logo";
 import Reveal from "./components/Reveal";
+import Faq from "./components/Faq";
+import Testimonios from "./components/Testimonios";
 
 const ventajas = [
   { titulo: "Atención personalizada", texto: "Consultas con seguimiento cercano de cada paciente.", icono: "🤝" },
@@ -11,6 +13,10 @@ const ventajas = [
 ];
 
 export default function Home() {
+  const faqRespondidas = preguntas.filter(
+    (p) => !p.pendiente && p.respuesta.trim(),
+  );
+
   return (
     <>
       {/* Hero */}
@@ -119,6 +125,10 @@ export default function Home() {
                 </div>
                 <h3 className="mt-5 text-lg font-semibold text-ink-900">{s.nombre}</h3>
                 <p className="mt-2 text-sm text-slate-500">{s.descripcion}</p>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-sm text-slate-500">
+                  <span className="font-medium text-brand-700">Para qué sirve: </span>
+                  {s.paraQue}
+                </p>
               </div>
             ))}
           </Reveal>
@@ -130,6 +140,37 @@ export default function Home() {
               Ver todos los servicios
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Preguntas frecuentes */}
+      <section className="mx-auto max-w-6xl px-4 py-20">
+        {/* Datos estructurados: Google puede mostrar estas preguntas en los
+            resultados de búsqueda. Solo se incluyen las ya respondidas. */}
+        {faqRespondidas.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqRespondidas.map((p) => ({
+                  "@type": "Question",
+                  name: p.pregunta,
+                  acceptedAnswer: { "@type": "Answer", text: p.respuesta },
+                })),
+              }),
+            }}
+          />
+        )}
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-3xl font-bold text-ink-900">Preguntas frecuentes</h2>
+          <p className="mt-4 text-slate-600">
+            Las dudas más comunes antes de la primera consulta.
+          </p>
+        </div>
+        <div className="mt-12">
+          <Faq items={preguntas} />
         </div>
       </section>
 
@@ -159,6 +200,9 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* Testimonios (no aparece hasta que haya testimonios reales cargados) */}
+      <Testimonios />
 
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-4 pb-4">

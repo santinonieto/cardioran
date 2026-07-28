@@ -30,7 +30,30 @@ export default function NosotrosPage() {
           </p>
           <h1 className="mt-2 text-4xl font-extrabold text-ink-900">{doctor.nombre}</h1>
           <p className="mt-1 text-lg text-brand-600">{doctor.especialidad}</p>
+
+          {/* Matrícula y experiencia: aparecen recién cuando se completan */}
+          {(doctor.matricula || doctor.experiencia) && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {doctor.matricula && (
+                <span className="rounded-full bg-brand-50 px-3 py-1 text-sm font-medium text-brand-700">
+                  {doctor.matricula}
+                </span>
+              )}
+              {doctor.experiencia && (
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">
+                  {doctor.experiencia}
+                </span>
+              )}
+            </div>
+          )}
+
           <p className="mt-6 text-lg text-slate-600">{doctor.bio}</p>
+
+          {doctor.enfoque && (
+            <p className="mt-4 border-l-2 border-brand-200 pl-4 text-lg italic text-slate-600">
+              {doctor.enfoque}
+            </p>
+          )}
           <a
             href={clinica.whatsappLink}
             target="_blank"
@@ -41,6 +64,44 @@ export default function NosotrosPage() {
           </a>
         </Reveal>
       </div>
+
+      {/* Formación y sociedades: cada bloque aparece al completarse */}
+      {(doctor.formacion.length > 0 || doctor.sociedades.length > 0) && (
+        <Reveal className="mt-16 grid gap-6 md:grid-cols-2">
+          {doctor.formacion.length > 0 && (
+            <div className="card-hover rounded-2xl border border-slate-100 bg-white p-8 shadow-sm hover:shadow-lg">
+              <h2 className="text-xl font-semibold text-ink-900">Formación académica</h2>
+              <ul className="mt-4 space-y-2 text-slate-600">
+                {doctor.formacion.map((f) => (
+                  <li key={f} className="flex gap-2">
+                    <span aria-hidden="true" className="text-brand-500">
+                      •
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {doctor.sociedades.length > 0 && (
+            <div className="card-hover rounded-2xl border border-slate-100 bg-white p-8 shadow-sm hover:shadow-lg">
+              <h2 className="text-xl font-semibold text-ink-900">
+                Sociedades médicas
+              </h2>
+              <ul className="mt-4 space-y-2 text-slate-600">
+                {doctor.sociedades.map((s) => (
+                  <li key={s} className="flex gap-2">
+                    <span aria-hidden="true" className="text-brand-500">
+                      •
+                    </span>
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </Reveal>
+      )}
 
       <Reveal className="mt-16 grid gap-6 md:grid-cols-2">
         <div className="card-hover rounded-2xl border border-slate-100 bg-white p-8 shadow-sm hover:shadow-lg">

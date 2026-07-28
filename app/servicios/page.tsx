@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { clinica, servicios } from "@/lib/data";
+import { antesDeLaConsulta, clinica, servicios } from "@/lib/data";
 import Reveal from "../components/Reveal";
 
 export const metadata: Metadata = {
@@ -32,7 +32,11 @@ export default function ServiciosPage() {
               {s.icono}
             </div>
             <h2 className="mt-5 text-lg font-semibold text-ink-900">{s.nombre}</h2>
-            <p className="mt-2 flex-1 text-sm text-slate-500">{s.descripcion}</p>
+            <p className="mt-2 text-sm text-slate-500">{s.descripcion}</p>
+            <p className="mt-3 flex-1 border-t border-slate-100 pt-3 text-sm text-slate-500">
+              <span className="font-medium text-brand-700">Para qué sirve: </span>
+              {s.paraQue}
+            </p>
             <a
               href={clinica.whatsappLink}
               target="_blank"
@@ -44,6 +48,35 @@ export default function ServiciosPage() {
           </div>
         ))}
       </Reveal>
+
+      {/* Antes de tu consulta */}
+      <div className="mt-16">
+        <h2 className="text-2xl font-bold text-ink-900">Antes de tu consulta</h2>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          Algunas recomendaciones para aprovechar mejor el turno.
+        </p>
+        <Reveal className="mt-8 grid gap-6 sm:grid-cols-2">
+          {antesDeLaConsulta
+            .filter((i) => !i.pendiente && i.respuesta.trim())
+            .map((i) => (
+              <div
+                key={i.pregunta}
+                className="card-hover flex gap-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg"
+              >
+                <span
+                  aria-hidden="true"
+                  className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-50 text-sm font-semibold text-brand-700"
+                >
+                  ✓
+                </span>
+                <div>
+                  <h3 className="font-semibold text-ink-900">{i.pregunta}</h3>
+                  <p className="mt-1 text-sm text-slate-500">{i.respuesta}</p>
+                </div>
+              </div>
+            ))}
+        </Reveal>
+      </div>
 
       <div className="mt-16 rounded-3xl bg-brand-50 px-8 py-12 text-center">
         <h2 className="text-2xl font-bold text-ink-900">

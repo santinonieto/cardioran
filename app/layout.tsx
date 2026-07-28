@@ -4,16 +4,92 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
-import { clinica, doctor } from "@/lib/data";
+import { clinica, doctor, servicios } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
+const titulo = `${clinica.nombre} · ${clinica.especialidad} · Concepción, Tucumán`;
+const descripcion = `${clinica.subtitulo} a cargo del ${doctor.nombre}, en Concepción, Tucumán. Consultas y estudios cardiológicos: ECG, ecocardiograma Doppler, Holter, MAPA y ergometría.`;
+
 export const metadata: Metadata = {
+  // Necesario para que las URLs de Open Graph se resuelvan absolutas.
+  metadataBase: new URL(clinica.sitio),
   title: {
-    default: `${clinica.nombre} · ${clinica.especialidad} · Concepción, Tucumán`,
+    default: titulo,
     template: `%s · ${clinica.nombre}`,
   },
-  description: `${clinica.subtitulo} en Concepción, Tucumán. ${doctor.nombre}. ${clinica.eslogan}.`,
+  description: descripcion,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    url: clinica.sitio,
+    siteName: clinica.nombre,
+    title: titulo,
+    description: descripcion,
+    images: [
+      {
+        url: "/imagenes/og.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${clinica.nombre} · ${clinica.subtitulo}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: titulo,
+    description: descripcion,
+    images: ["/imagenes/og.jpg"],
+  },
+};
+
+/**
+ * Datos estructurados para Google (schema.org).
+ * Combina la ficha del consultorio con la del profesional, para que aparezcan
+ * la dirección, el teléfono y los horarios en los resultados de búsqueda.
+ */
+const datosEstructurados = {
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  name: clinica.nombre,
+  description: descripcion,
+  url: clinica.sitio,
+  telephone: clinica.whatsapp,
+  image: `${clinica.sitio}/imagenes/og.jpg`,
+  medicalSpecialty: "Cardiovascular",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: clinica.calle,
+    addressLocality: clinica.ciudad,
+    addressRegion: clinica.provincia,
+    addressCountry: clinica.pais,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "11:00",
+      closes: "13:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "18:00",
+      closes: "21:30",
+    },
+  ],
+  employee: {
+    "@type": "Physician",
+    name: doctor.nombre,
+    medicalSpecialty: "Cardiovascular",
+    jobTitle: doctor.especialidad,
+  },
+  availableService: servicios.map((s) => ({
+    "@type": "MedicalTest",
+    name: s.nombre,
+    description: s.paraQue,
+  })),
 };
 
 export default function RootLayout({
@@ -31,6 +107,10 @@ export default function RootLayout({
         <noscript>
           <style>{`.reveal > *, .slide-in { opacity: 1 !important; animation: none !important; }`}</style>
         </noscript>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(datosEstructurados) }}
+        />
       </head>
       <body className="flex min-h-screen flex-col font-sans">
         <Header />
