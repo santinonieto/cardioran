@@ -33,6 +33,129 @@ html {
   scroll-behavior: smooth;
 }
 
+/*
+ * Entrada del hero por CSS y no con JavaScript.
+ * El <h1> es el elemento LCP: si su opacidad dependiera de que hidrate
+ * Framer Motion, quedaría invisible casi un segundo y el LCP se dispara.
+ * Con CSS pinta apenas llega el HTML.
+ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero-in {
+  animation: fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-in-1 { animation-delay: 0.06s; }
+.hero-in-2 { animation-delay: 0.12s; }
+.hero-in-3 { animation-delay: 0.18s; }
+
+/*
+ * Aparición al entrar en pantalla, con efecto escalonado.
+ * El contenedor recibe la clase `is-visible` desde <Reveal> cuando el
+ * IntersectionObserver lo detecta; el escalonado sale de :nth-child, sin JS.
+ *
+ * Se usa animation-fill-mode: backwards (y no `both`) a propósito: con `both`
+ * el transform del último fotograma queda fijado y pisaría al :hover de las
+ * tarjetas. Con `backwards`, al terminar la animación el elemento vuelve a sus
+ * estilos normales y el hover funciona.
+ */
+.reveal > * {
+  opacity: 0;
+}
+
+.reveal.is-visible > * {
+  opacity: 1;
+  animation: fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.reveal.is-visible > *:nth-child(1) { animation-delay: 0s; }
+.reveal.is-visible > *:nth-child(2) { animation-delay: 0.08s; }
+.reveal.is-visible > *:nth-child(3) { animation-delay: 0.16s; }
+.reveal.is-visible > *:nth-child(4) { animation-delay: 0.24s; }
+.reveal.is-visible > *:nth-child(5) { animation-delay: 0.32s; }
+.reveal.is-visible > *:nth-child(6) { animation-delay: 0.4s; }
+
+/* Entrada lateral, para la sección del profesional. */
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-32px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to { opacity: 1; transform: none; }
+}
+
+.slide-in {
+  opacity: 0;
+}
+
+.slide-in.is-visible {
+  opacity: 1;
+  animation: slide-in-left 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.slide-in-from-right.is-visible {
+  animation-name: slide-in-right;
+}
+
+/* Elevación de las tarjetas al pasar el mouse. */
+.card-hover {
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s ease-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Latido del corazón del hero. */
+@keyframes heartbeat {
+  0%, 60%, 100% { transform: scale(1); }
+  15% { transform: scale(1.1); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.06); }
+}
+
+.heartbeat {
+  display: inline-block;
+  animation: heartbeat 2.2s ease-in-out infinite;
+}
+
+/* Respeta la preferencia de movimiento reducido del sistema: el contenido se
+   muestra completo y estático, sin desplazamientos ni latido. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-in,
+  .heartbeat,
+  .reveal.is-visible > *,
+  .slide-in.is-visible {
+    animation: none;
+  }
+
+  .reveal > *,
+  .slide-in {
+    opacity: 1;
+  }
+
+  .card-hover {
+    transition: none;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
 body {
   @apply bg-white text-slate-700 antialiased;
 }

@@ -124,7 +124,7 @@ export default function ContactoPage() {
 
 function InfoCard({ icono, titulo, texto }: { icono: string; titulo: string; texto: string }) {
   return (
-    <div className="flex gap-4 rounded-2xl border border-slate-100 bg-white p-5">
+    <div className="card-hover flex gap-4 rounded-2xl border border-slate-100 bg-white p-5 hover:shadow-lg">
       <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-xl">
         {icono}
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { clinica, servicios } from "@/lib/data";
+import Reveal from "../components/Reveal";
 
 export const metadata: Metadata = {
   title: "Servicios",
@@ -21,11 +22,11 @@ export default function ServiciosPage() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <Reveal className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {servicios.map((s) => (
           <div
             key={s.slug}
-            className="flex flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm"
+            className="card-hover flex flex-col rounded-2xl border border-slate-100 bg-white p-7 shadow-sm hover:shadow-lg"
           >
             <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-2xl">
               {s.icono}
@@ -42,7 +43,7 @@ export default function ServiciosPage() {
             </a>
           </div>
         ))}
-      </div>
+      </Reveal>
 
       <div className="mt-16 rounded-3xl bg-brand-50 px-8 py-12 text-center">
         <h2 className="text-2xl font-bold text-ink-900">

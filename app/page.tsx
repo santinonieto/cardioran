@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { clinica, doctor, servicios } from "@/lib/data";
 import Logo from "./components/Logo";
+import Reveal from "./components/Reveal";
 
 const ventajas = [
   { titulo: "Atención personalizada", texto: "Consultas con seguimiento cercano de cada paciente.", icono: "🤝" },
@@ -16,18 +17,19 @@ export default function Home() {
       <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 lg:grid-cols-2 lg:py-28">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700">
-              ❤ {clinica.subtitulo} · Concepción, Tucumán
+            <span className="hero-in inline-flex items-center gap-2 rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700">
+              <span className="heartbeat" aria-hidden="true">❤</span>{" "}
+              {clinica.subtitulo} · Concepción, Tucumán
             </span>
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight text-ink-900 sm:text-5xl">
+            <h1 className="hero-in hero-in-1 mt-6 text-4xl font-extrabold leading-tight text-ink-900 sm:text-5xl">
               {clinica.eslogan}
             </h1>
-            <p className="mt-6 max-w-md text-lg text-slate-600">
+            <p className="hero-in hero-in-2 mt-6 max-w-md text-lg text-slate-600">
               El {doctor.nombre} te acompaña en la prevención, el diagnóstico y el
               tratamiento de las enfermedades del corazón, con una atención cercana y
               personalizada.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="hero-in hero-in-3 mt-8 flex flex-wrap gap-4">
               <a
                 href={clinica.whatsappLink}
                 target="_blank"
@@ -82,18 +84,18 @@ export default function Home() {
       {/* Ventajas */}
       <section className="mx-auto max-w-6xl px-4 py-20">
         <h2 className="sr-only">Por qué elegir CARDIORAN</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {ventajas.map((v) => (
             <div
               key={v.titulo}
-              className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition hover:shadow-md"
+              className="card-hover rounded-2xl border border-slate-100 bg-white p-6 shadow-sm hover:shadow-lg"
             >
               <div className="text-3xl">{v.icono}</div>
               <h3 className="mt-4 font-semibold text-ink-900">{v.titulo}</h3>
               <p className="mt-2 text-sm text-slate-500">{v.texto}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* Servicios */}
@@ -106,11 +108,11 @@ export default function Home() {
               el consultorio.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {servicios.map((s) => (
               <div
                 key={s.slug}
-                className="group rounded-2xl border border-slate-100 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                className="card-hover rounded-2xl border border-slate-100 bg-white p-7 shadow-sm hover:shadow-lg"
               >
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-2xl">
                   {s.icono}
@@ -119,7 +121,7 @@ export default function Home() {
                 <p className="mt-2 text-sm text-slate-500">{s.descripcion}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
           <div className="mt-12 text-center">
             <Link
               href="/servicios"
@@ -134,14 +136,14 @@ export default function Home() {
       {/* Sobre el doctor */}
       <section className="mx-auto max-w-6xl px-4 py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="relative mx-auto w-full max-w-sm">
+          <Reveal variant="left" className="relative mx-auto w-full max-w-sm">
             <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-brand-100 to-brand-300 p-1 shadow-xl">
               <div className="grid h-full place-items-center rounded-[22px] bg-white/40 text-8xl font-bold text-brand-700">
                 {doctor.iniciales}
               </div>
             </div>
-          </div>
-          <div>
+          </Reveal>
+          <Reveal variant="right">
             <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
               El profesional
             </p>
@@ -154,7 +156,7 @@ export default function Home() {
             >
               Conocé más →
             </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
