@@ -25,8 +25,9 @@ export const clinica = {
   whatsappConsultaLink:
     "https://wa.me/5491155945109?text=Hola%20CARDIORAN%2C%20tengo%20una%20consulta.",
   direccion: "Shipton 1045 (entre El Ceibo y Güemes), Concepción, Tucumán",
+  // El consultorio dejó de atender los sábados: ambas franjas son de lunes a viernes.
   horarios: [
-    { dias: "Lunes a viernes", horas: "18:00 – 21:30" },
+    { dias: "Lunes a viernes", horas: "11:00 – 13:00 y 18:00 – 21:30" },
   ] as Horario[],
 };
 

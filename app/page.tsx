@@ -6,7 +6,7 @@ const ventajas = [
   { titulo: "Atención personalizada", texto: "Consultas con seguimiento cercano de cada paciente.", icono: "🤝" },
   { titulo: "Estudios en el consultorio", texto: "Electrocardiograma, ecocardiograma Doppler, Holter y más, en un solo lugar.", icono: "🔬" },
   { titulo: "Enfoque preventivo", texto: "Control de la presión arterial con MAPA (Monitoreo Ambulatorio de Presión Arterial) y de los factores de riesgo cardiovascular.", icono: "🛡️" },
-  { titulo: "Turnos por la tarde", texto: "Atención de lunes a viernes, de 18:00 a 21:30.", icono: "🕐" },
+  { titulo: "Turnos mañana y tarde", texto: "Atención de lunes a viernes, de 11:00 a 13:00 y de 18:00 a 21:30.", icono: "🕐" },
 ];
 
 export default function Home() {
