@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
+import SocialLinks from "./SocialLinks";
 import { clinica } from "@/lib/data";
 
 export default function Footer() {
@@ -51,6 +52,10 @@ export default function Footer() {
             </li>
             <li>{clinica.direccion}</li>
           </ul>
+          <div className="mt-5">
+            <p className="text-sm font-semibold text-ink-900">Seguinos</p>
+            <SocialLinks className="mt-2" />
+          </div>
         </div>
 
         <div>

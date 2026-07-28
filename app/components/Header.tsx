@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import Logo from "./Logo";
+import SocialLinks from "./SocialLinks";
 import { clinica } from "@/lib/data";
 
 const nav = [
@@ -22,7 +23,7 @@ export default function Header() {
           <Logo width={170} priority className="h-auto w-[150px] sm:w-[170px]" />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 md:flex lg:gap-8">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -32,6 +33,11 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
+          {/* Se ocultan por debajo de lg: en tablet el header queda apretado. */}
+          <SocialLinks
+            className="hidden lg:flex"
+            iconClassName="h-[18px] w-[18px]"
+          />
           <a
             href={clinica.whatsappLink}
             target="_blank"
@@ -73,6 +79,10 @@ export default function Header() {
             >
               Solicitar turno
             </a>
+            <div className="mt-2 flex items-center gap-3 border-t border-slate-100 px-3 pt-3">
+              <span className="text-sm text-slate-500">Seguinos:</span>
+              <SocialLinks onNavigate={() => setOpen(false)} />
+            </div>
           </div>
         </nav>
       )}

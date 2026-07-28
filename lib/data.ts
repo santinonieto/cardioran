@@ -52,6 +52,8 @@ export const clinica = {
   whatsappConsultaLink:
     "https://wa.me/5491155945109?text=Hola%20CARDIORAN%2C%20tengo%20una%20consulta.",
   direccion: "Shipton 1045 (entre El Ceibo y Güemes), Concepción, Tucumán",
+  instagram: "https://www.instagram.com/cardioran",
+  facebook: "https://www.facebook.com/cardioransaludcardiovascular",
   // Campos separados, para los datos estructurados de Google
   calle: "Shipton 1045",
   ciudad: "Concepción",
