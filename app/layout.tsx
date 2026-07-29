@@ -21,6 +21,18 @@ export const metadata: Metadata = {
   },
   description: descripcion,
   alternates: { canonical: "/" },
+  // Favicon generado a partir del corazón del logo (public/imagenes/cardioran-logo.png),
+  // recortado y compuesto sobre fondo blanco: el trazo del corazón es fino y
+  // sobre transparencia se pierde en tamaños chicos (16x16) y en pestañas
+  // con tema oscuro. Archivos en /public, generados con sharp.
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
   openGraph: {
     type: "website",
     locale: "es_AR",
