@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
-import { clinica, doctor, servicios } from "@/lib/data";
+import { clinica, doctor, servicios, testimonios } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -43,6 +43,11 @@ export const metadata: Metadata = {
     images: ["/imagenes/og.jpg"],
   },
 };
+
+// Solo las reseñas efectivamente publicadas en el sitio.
+const reseñas = testimonios.filter(
+  (t) => !t.pendiente && t.cita.trim() && t.nombre.trim(),
+);
 
 /**
  * Datos estructurados para Google (schema.org).
@@ -92,6 +97,35 @@ const datosEstructurados = {
     name: s.nombre,
     description: s.paraQue,
   })),
+
+  // Reseñas reales publicadas por los pacientes en Google.
+  //
+  // OJO: desde 2019 Google NO muestra estrellas en los resultados de búsqueda
+  // cuando las reseñas están en el sitio de la propia empresa ("self-serving").
+  // El marcado es válido y describe reseñas genuinas, pero las estrellas de
+  // Google salen de la ficha de Google Business, no de acá.
+  ...(reseñas.length > 0 && {
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: (
+        reseñas.reduce((t, r) => t + (r.estrellas ?? 5), 0) / reseñas.length
+      ).toFixed(1),
+      reviewCount: reseñas.length,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    review: reseñas.map((r) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: r.nombre },
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: r.estrellas ?? 5,
+        bestRating: 5,
+        worstRating: 1,
+      },
+      reviewBody: r.cita,
+    })),
+  }),
 };
 
 export default function RootLayout({

@@ -5,7 +5,7 @@ import { WhatsAppIcon } from "../components/WhatsAppButton";
 export const metadata: Metadata = {
   title: "Contacto",
   description:
-    "Contactate con CARDIORAN por WhatsApp. Shipton 1045, Concepción, Tucumán.",
+    "Contactate con CARDIORAN por WhatsApp. Shipton 1040, Concepción, Tucumán.",
 };
 
 export default function ContactoPage() {
@@ -46,7 +46,7 @@ export default function ContactoPage() {
           <div className="overflow-hidden rounded-2xl border border-slate-100">
             <iframe
               title="Ubicación de CARDIORAN en el mapa"
-              src="https://www.google.com/maps?q=Shipton%201045%2C%20Concepci%C3%B3n%2C%20Tucum%C3%A1n%2C%20Argentina&output=embed"
+              src="https://www.google.com/maps?q=Shipton%201040%2C%20Concepci%C3%B3n%2C%20Tucum%C3%A1n%2C%20Argentina&output=embed"
               className="h-64 w-full border-0"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -54,7 +54,7 @@ export default function ContactoPage() {
             />
           </div>
           <a
-            href="https://www.google.com/maps/search/?api=1&query=Shipton%201045%2C%20Concepci%C3%B3n%2C%20Tucum%C3%A1n%2C%20Argentina"
+            href="https://www.google.com/maps/search/?api=1&query=Shipton%201040%2C%20Concepci%C3%B3n%2C%20Tucum%C3%A1n%2C%20Argentina"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"

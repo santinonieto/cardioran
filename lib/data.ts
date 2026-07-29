@@ -51,11 +51,16 @@ export const clinica = {
   // Enlace de WhatsApp para consultas generales (no turnos)
   whatsappConsultaLink:
     "https://wa.me/5491155945109?text=Hola%20CARDIORAN%2C%20tengo%20una%20consulta.",
-  direccion: "Shipton 1045 (entre El Ceibo y Güemes), Concepción, Tucumán",
+  direccion: "Shipton 1040 (entre El Ceibo y Güemes), Concepción, Tucumán",
   instagram: "https://www.instagram.com/cardioran",
   facebook: "https://www.facebook.com/cardioransaludcardiovascular",
+  // TODO: reemplazar por el enlace directo al perfil de Google Business.
+  // Se obtiene desde Google Maps -> ficha del consultorio -> Compartir.
+  // Mientras tanto, esta búsqueda lleva igual a la ficha.
+  googleReviews:
+    "https://www.google.com/maps/search/?api=1&query=CARDIORAN%20Concepci%C3%B3n%20Tucum%C3%A1n",
   // Campos separados, para los datos estructurados de Google
-  calle: "Shipton 1045",
+  calle: "Shipton 1040",
   ciudad: "Concepción",
   provincia: "Tucumán",
   pais: "AR",
@@ -228,13 +233,29 @@ export const antesDeLaConsulta: Pregunta[] = [
 /**
  * Testimonios de pacientes.
  *
- * IMPORTANTE: no se publican testimonios inventados. Estos son la estructura
- * a completar con testimonios reales y autorizados por cada paciente.
- * Mientras todos estén en `pendiente`, la sección entera no aparece en el sitio.
+ * Son reseñas reales publicadas por los pacientes en Google. Se transcriben
+ * textualmente. No se publican testimonios inventados: si alguno se agrega sin
+ * respuesta o sin nombre, la tarjeta no se muestra.
  */
 export const testimonios: Testimonio[] = [
-  // TODO: reemplazar por un testimonio real y borrar `pendiente`.
-  { cita: "", nombre: "", estrellas: 5, pendiente: true },
-  { cita: "", nombre: "", estrellas: 5, pendiente: true },
-  { cita: "", nombre: "", estrellas: 5, pendiente: true },
+  {
+    cita: "Excelente servicio. Muy amable tanto la recepción como así también la atención del Dr. Nieto. Se destaca la limpieza del lugar y los detalles naturales dentro del establecimiento.",
+    nombre: "María Belen Salasopen",
+    estrellas: 5,
+  },
+  {
+    cita: "Atención de excelencia, al mejor nivel de la medicina moderna. Trato amable del personal administrativo, ni que hablar de la atención médica en sí. Aparatos modernos para todos los estudios cardiológicos.",
+    nombre: "Carlos Santillán",
+    estrellas: 5,
+  },
+  {
+    cita: "Muy completo y excelente atención.",
+    nombre: "Mariano Delgado Velardez",
+    estrellas: 5,
+  },
+  {
+    cita: "Muy buena atención!!",
+    nombre: "Rossana Fregenal",
+    estrellas: 5,
+  },
 ];
