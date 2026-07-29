@@ -240,7 +240,7 @@ export const antesDeLaConsulta: Pregunta[] = [
 export const testimonios: Testimonio[] = [
   {
     cita: "Excelente servicio. Muy amable tanto la recepción como así también la atención del Dr. Nieto. Se destaca la limpieza del lugar y los detalles naturales dentro del establecimiento.",
-    nombre: "María Belen Salasopen",
+    nombre: "María Belen Salas",
     estrellas: 5,
   },
   {
