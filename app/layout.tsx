@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   },
   description: descripcion,
   alternates: { canonical: "/" },
+  // Verificación de propiedad en Google Search Console.
+  verification: {
+    google: "google28536ffb6fa6c28b.html",
+  },
   // Favicon generado a partir del corazón del logo (public/imagenes/cardioran-logo.png),
   // recortado y compuesto sobre fondo blanco: el trazo del corazón es fino y
   // sobre transparencia se pierde en tamaños chicos (16x16) y en pestañas
