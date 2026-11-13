@@ -1,4 +1,5 @@
 import Script from "next/script";
+import SeguimientoClics from "./SeguimientoClics";
 
 /** Measurement ID de Google Analytics 4 del consultorio. */
 export const GA_MEASUREMENT_ID = "G-K7RW16SYR4";
@@ -34,6 +35,7 @@ export default function Analytics() {
           gtag('config', '${GA_MEASUREMENT_ID}');
         `}
       </Script>
+      <SeguimientoClics />
     </>
   );
 }

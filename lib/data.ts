@@ -16,6 +16,8 @@ export type Servicio = {
   /** Para qué sirve o cuándo se indica. Orientado al paciente y al SEO. */
   paraQue: string;
   icono: string;
+  /** Cómo se nombra en el mensaje de WhatsApp: "quisiera un turno para ___". */
+  turno: string;
 };
 
 export type Horario = {
@@ -48,12 +50,15 @@ export const clinica = {
   // Enlace de WhatsApp con mensaje pre-cargado para pedir turno
   whatsappLink:
     "https://wa.me/5491155945109?text=Hola%20CARDIORAN%2C%20quisiera%20solicitar%20un%20turno%20con%20el%20Dr.%20Ramiro%20Augusto%20Nieto.",
+  // Base para armar mensajes propios (ver `whatsappTurno`)
+  whatsappBase: "https://wa.me/5491155945109",
   // Enlace de WhatsApp para consultas generales (no turnos)
   whatsappConsultaLink:
     "https://wa.me/5491155945109?text=Hola%20CARDIORAN%2C%20tengo%20una%20consulta.",
   direccion: "Shipton 1045 (entre El Ceibo y Güemes), Concepción, Tucumán",
   instagram: "https://www.instagram.com/cardioran",
   facebook: "https://www.facebook.com/cardioransaludcardiovascular",
+  tiktok: "https://www.tiktok.com/@cardioran",
   // TODO: reemplazar por el enlace directo al perfil de Google Business.
   // Se obtiene desde Google Maps -> ficha del consultorio -> Compartir.
   // Mientras tanto, esta búsqueda lleva igual a la ficha.
@@ -82,6 +87,39 @@ export const aviso = {
   texto: "Este sábado 14 de noviembre atendemos de 10 a 14 hs.",
   hasta: "2026-11-14T23:59:59-03:00",
 };
+
+/**
+ * Fotos reales del consultorio (public/imagenes/consultorio/).
+ * Retocadas solo en luz y color, sin agregar ni quitar nada, y sin metadatos
+ * (EXIF/GPS). No usar fotos donde aparezca el doctor sin su visto bueno.
+ * `posicion`: qué parte de la foto se prioriza al recortarla en la grilla.
+ */
+export type Foto = {
+  src: string;
+  alt: string;
+  titulo: string;
+  ancho: number;
+  alto: number;
+  posicion?: string;
+};
+
+export const fotos = {
+  fachada: { src: "/imagenes/consultorio/fachada.webp", alt: "Fachada del consultorio CARDIORAN en Shipton 1045, Concepción", titulo: "Fachada · Shipton 1045", ancho: 1195, alto: 1600 },
+  entrada: { src: "/imagenes/consultorio/entrada-shipton-1045.webp", alt: "Entrada de vidrio con el número 1045 de la calle Shipton", titulo: "Entrada", ancho: 1195, alto: 1600 },
+  recepcion: { src: "/imagenes/consultorio/recepcion-logo.webp", alt: "Recepción de CARDIORAN con el logo en la pared", titulo: "Recepción", ancho: 1195, alto: 1600 },
+  salaDeEspera: { src: "/imagenes/consultorio/sala-de-espera.webp", alt: "Sala de espera con sillas rojas y negras", titulo: "Sala de espera", ancho: 1600, alto: 1195, posicion: "70% 60%" },
+  ergometria: { src: "/imagenes/consultorio/sala-ergometria.webp", alt: "Sala de ergometría con cinta para la prueba de esfuerzo", titulo: "Sala de ergometría", ancho: 1195, alto: 1600 },
+  consultorio: { src: "/imagenes/consultorio/consultorio.webp", alt: "Consultorio con escritorio, diplomas y biblioteca", titulo: "Consultorio", ancho: 1195, alto: 1600 },} satisfies Record<string, Foto>;
+
+/** Fotos de la galería "El consultorio", en orden. */
+export const galeria: Foto[] = [
+  fotos.fachada,
+  fotos.entrada,
+  fotos.recepcion,
+  fotos.salaDeEspera,
+  fotos.ergometria,
+  fotos.consultorio,
+];
 
 /**
  * Obras sociales y prepagas que atiende el doctor.
@@ -119,20 +157,26 @@ export const obrasSociales: string[] = [
   "TV Salud",
 ];
 
+/** Enlace de WhatsApp con el mensaje ya escrito para pedir turno de un estudio. */
+export function whatsappTurno(servicio: Servicio) {
+  const texto = `Hola CARDIORAN, quisiera solicitar un turno para ${servicio.turno}.`;
+  return `${clinica.whatsappBase}?text=${encodeURIComponent(texto)}`;
+}
+
 export const doctor = {
   nombre: "Dr. Ramiro Augusto Nieto",
   especialidad: "Médico Cardiólogo",
   iniciales: "RAN",
   bio: "El Dr. Ramiro Augusto Nieto es médico especialista en cardiología. Se dedica a la prevención, el diagnóstico y el tratamiento de las enfermedades del corazón, con una atención cercana y personalizada para cada paciente.",
 
-  // --- Datos profesionales: completar con el doctor ---
-  // TODO: matrícula profesional (ej. "M.P. 1234 – M.N. 5678")
-  matricula: "",
+  // --- Datos profesionales (confirmados por Santi el 13/11/2026) ---
+  matricula: "M.N. 118508 · M.P. 6829",
   // TODO: años de experiencia (ej. "Más de 20 años de trayectoria")
   experiencia: "",
-  // TODO: formación académica. Una entrada por título/posgrado.
-  // Ej: "Médico – Universidad Nacional de Tucumán"
-  formacion: [] as string[],
+  formacion: [
+    "Médico – Universidad Nacional de Tucumán",
+    "Médico Especialista en Cardiología – Universidad de Buenos Aires",
+  ] as string[],
   // TODO: sociedades médicas a las que pertenece.
   // Ej: "Sociedad Argentina de Cardiología (SAC)"
   sociedades: [] as string[],
@@ -145,6 +189,7 @@ export const servicios: Servicio[] = [
   {
     slug: "consulta-cardiologica",
     nombre: "Consulta cardiológica",
+    turno: "una consulta cardiológica",
     descripcion:
       "Evaluación clínica completa del corazón, revisión de antecedentes y plan de tratamiento personalizado.",
     paraQue:
@@ -154,6 +199,7 @@ export const servicios: Servicio[] = [
   {
     slug: "electrocardiograma",
     nombre: "Electrocardiograma (ECG)",
+    turno: "un electrocardiograma",
     descripcion:
       "Registro de la actividad eléctrica del corazón para detectar arritmias y otras alteraciones.",
     paraQue:
@@ -163,6 +209,7 @@ export const servicios: Servicio[] = [
   {
     slug: "ecocardiograma",
     nombre: "Ecocardiograma Doppler",
+    turno: "un ecocardiograma Doppler",
     descripcion:
       "Ecografía del corazón que permite evaluar su estructura y funcionamiento en tiempo real.",
     paraQue:
@@ -172,6 +219,7 @@ export const servicios: Servicio[] = [
   {
     slug: "holter",
     nombre: "Holter de 24 horas",
+    turno: "un Holter de 24 horas",
     descripcion:
       "Monitoreo continuo del ritmo cardíaco durante el día a día para detectar arritmias.",
     paraQue:
@@ -181,6 +229,7 @@ export const servicios: Servicio[] = [
   {
     slug: "mapa-presion",
     nombre: "Monitoreo de presión (MAPA)",
+    turno: "un monitoreo de presión (MAPA)",
     descripcion:
       "Control ambulatorio de la presión arterial durante 24 horas para el diagnóstico de hipertensión.",
     paraQue:
@@ -190,6 +239,7 @@ export const servicios: Servicio[] = [
   {
     slug: "ergometria",
     nombre: "Ergometría",
+    turno: "una ergometría",
     descripcion:
       "Prueba de esfuerzo que evalúa la respuesta del corazón ante la actividad física.",
     paraQue:

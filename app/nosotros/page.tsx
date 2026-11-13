@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { clinica, doctor } from "@/lib/data";
 import Reveal from "../components/Reveal";
+import Galeria from "../components/Galeria";
 
 export const metadata: Metadata = {
   title: "El profesional",
@@ -16,14 +17,8 @@ const valores = [
 export default function NosotrosPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-16">
-      <div className="grid items-center gap-12 lg:grid-cols-2">
-        <Reveal variant="left" className="relative mx-auto w-full max-w-sm">
-          <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-brand-100 to-brand-300 p-1 shadow-xl">
-            <div className="grid h-full place-items-center rounded-[22px] bg-white/40 text-8xl font-bold text-brand-700">
-              {doctor.iniciales}
-            </div>
-          </div>
-        </Reveal>
+      {/* Sin foto hasta tener una profesional del doctor. */}
+      <div className="max-w-3xl">
         <Reveal variant="right">
           <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">
             El profesional
@@ -123,6 +118,10 @@ export default function NosotrosPage() {
           </div>
         </div>
       </Reveal>
+
+      <div className="mt-20">
+        <Galeria bajada="Consultas y estudios en un mismo lugar: Shipton 1045, Concepción, Tucumán." />
+      </div>
 
       <div className="mt-16">
         <h2 className="text-2xl font-bold text-ink-900">Cómo trabajamos</h2>

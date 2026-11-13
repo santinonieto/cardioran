@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { clinica } from "@/lib/data";
+import Image from "next/image";
+import { clinica, fotos } from "@/lib/data";
 import { WhatsAppIcon } from "../components/WhatsAppButton";
 
 export const metadata: Metadata = {
@@ -43,6 +44,21 @@ export default function ContactoPage() {
               </ul>
             </div>
           </div>
+          <figure className="overflow-hidden rounded-2xl border border-slate-100 bg-white">
+            <div className="relative aspect-[4/3]">
+              <Image
+                src={fotos.fachada.src}
+                alt={fotos.fachada.alt}
+                fill
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="object-cover"
+                style={{ objectPosition: "50% 0%" }}
+              />
+            </div>
+            <figcaption className="px-5 py-3 text-sm text-slate-600">
+              Así nos reconocés al llegar: la fachada de Shipton 1045.
+            </figcaption>
+          </figure>
           <div className="overflow-hidden rounded-2xl border border-slate-100">
             <iframe
               title="Ubicación de CARDIORAN en el mapa"

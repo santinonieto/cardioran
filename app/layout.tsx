@@ -82,7 +82,7 @@ const datosEstructurados = {
   image: `${clinica.sitio}/imagenes/og.jpg`,
   medicalSpecialty: "Cardiovascular",
   // Vincula el sitio con los perfiles oficiales del consultorio.
-  sameAs: [clinica.instagram, clinica.facebook],
+  sameAs: [clinica.instagram, clinica.facebook, clinica.tiktok],
   address: {
     "@type": "PostalAddress",
     streetAddress: clinica.calle,

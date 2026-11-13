@@ -6,6 +6,7 @@ import {
   obrasSociales,
   obrasSocialesActualizacion,
   servicios,
+  whatsappTurno,
 } from "@/lib/data";
 import Reveal from "../components/Reveal";
 
@@ -44,9 +45,11 @@ export default function ServiciosPage() {
               {s.paraQue}
             </p>
             <a
-              href={clinica.whatsappLink}
+              href={whatsappTurno(s)}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`Solicitar turno para ${s.nombre} por WhatsApp`}
+              data-estudio={s.slug}
               className="mt-5 text-sm font-semibold text-brand-600 hover:text-brand-700"
             >
               Solicitar turno →
