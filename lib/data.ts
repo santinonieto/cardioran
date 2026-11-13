@@ -51,7 +51,7 @@ export const clinica = {
   // Enlace de WhatsApp para consultas generales (no turnos)
   whatsappConsultaLink:
     "https://wa.me/5491155945109?text=Hola%20CARDIORAN%2C%20tengo%20una%20consulta.",
-  direccion: "Shipton 1040 (entre El Ceibo y Güemes), Concepción, Tucumán",
+  direccion: "Shipton 1045 (entre El Ceibo y Güemes), Concepción, Tucumán",
   instagram: "https://www.instagram.com/cardioran",
   facebook: "https://www.facebook.com/cardioransaludcardiovascular",
   // TODO: reemplazar por el enlace directo al perfil de Google Business.
@@ -60,16 +60,64 @@ export const clinica = {
   googleReviews:
     "https://www.google.com/maps/search/?api=1&query=CARDIORAN%20Concepci%C3%B3n%20Tucum%C3%A1n",
   // Campos separados, para los datos estructurados de Google
-  calle: "Shipton 1040",
+  calle: "Shipton 1045",
   ciudad: "Concepción",
   provincia: "Tucumán",
   pais: "AR",
   sitio: "https://cardioran.com.ar",
-  // El consultorio dejó de atender los sábados: ambas franjas son de lunes a viernes.
+  // Horario vigente (confirmado el 13/11/2026). Los sábados no se atiende de forma
+  // regular: cuando el doctor atiende un sábado se avisa con `aviso` (más abajo).
   horarios: [
-    { dias: "Lunes a viernes", horas: "11:00 – 13:00 y 18:00 – 21:30" },
+    { dias: "Lunes a viernes", horas: "10:00 – 13:45 y 18:00 – 21:45" },
   ] as Horario[],
 };
+
+/**
+ * Aviso temporal que se muestra arriba de todo el sitio (por ejemplo, "este
+ * sábado atendemos"). Se oculta solo pasada la fecha `hasta`.
+ * Para quitarlo antes, borrar el texto. Para uno nuevo: cambiar texto y fecha.
+ * `hasta` en formato ISO con zona horaria de Argentina (-03:00).
+ */
+export const aviso = {
+  texto: "Este sábado 14 de noviembre atendemos de 10 a 14 hs.",
+  hasta: "2026-11-14T23:59:59-03:00",
+};
+
+/**
+ * Obras sociales y prepagas que atiende el doctor.
+ * Fuente: planilla "Estado Obras Sociales" del Círculo Médico del Sur al 01/11/2026.
+ * Solo nombres: NO publicar valores de consulta, coseguros ni modalidades.
+ * Excluidas las suspendidas (APM). Actualizar la fecha al revisar el listado.
+ */
+export const obrasSocialesActualizacion = "noviembre de 2026";
+export const obrasSociales: string[] = [
+  "ASUNT (UNT)",
+  "Asociación Mutual Protección Familiar",
+  "Boreal",
+  "Bramed",
+  "DASUTEN (Universidad Tecnológica)",
+  "Galeno",
+  "Jerárquicos Salud",
+  "Medifé",
+  "Nobis",
+  "OMINT",
+  "OSDE",
+  "OSFATLYF (Luz y Fuerza)",
+  "OSJERA",
+  "OSMATA",
+  "OSMITA",
+  "OSPAAT",
+  "OSSEG",
+  "Personal de Farmacia (AGEF)",
+  "Prevención Salud",
+  "Red de Seguro Médico",
+  "San Pedro (Conferencia Episcopal Argentina)",
+  "Sancor Salud",
+  "Soremer",
+  "Subsidio de Salud",
+  "Swiss Medical / Docthos",
+  "TV Salud",
+];
 
 export const doctor = {
   nombre: "Dr. Ramiro Augusto Nieto",
@@ -167,9 +215,8 @@ export const preguntas: Pregunta[] = [
   },
   {
     pregunta: "¿Atienden obras sociales o prepagas?",
-    // TODO: completar con las obras sociales y prepagas que se atienden.
-    respuesta: "",
-    pendiente: true,
+    respuesta:
+      "Sí, atendemos distintas obras sociales y prepagas. Podés ver el listado en la sección Servicios. La cobertura puede cambiar, así que escribinos por WhatsApp para confirmar la tuya antes de sacar turno.",
   },
   {
     pregunta: "¿Cuánto dura una consulta cardiológica?",

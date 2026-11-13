@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Analytics from "./components/Analytics";
+import Aviso from "./components/Aviso";
 import { clinica, doctor, servicios, testimonios } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -93,14 +94,14 @@ const datosEstructurados = {
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      opens: "11:00",
-      closes: "13:00",
+      opens: "10:00",
+      closes: "13:45",
     },
     {
       "@type": "OpeningHoursSpecification",
       dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       opens: "18:00",
-      closes: "21:30",
+      closes: "21:45",
     },
   ],
   employee: {
@@ -166,6 +167,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-screen flex-col font-sans">
+        <Aviso />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

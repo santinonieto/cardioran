@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { antesDeLaConsulta, clinica, servicios } from "@/lib/data";
+import {
+  antesDeLaConsulta,
+  clinica,
+  obrasSociales,
+  obrasSocialesActualizacion,
+  servicios,
+} from "@/lib/data";
 import Reveal from "../components/Reveal";
 
 export const metadata: Metadata = {
@@ -76,6 +82,49 @@ export default function ServiciosPage() {
               </div>
             ))}
         </Reveal>
+      </div>
+
+      {/* Obras sociales y prepagas: solo nombres, sin valores */}
+      <div id="obras-sociales" className="mt-16 scroll-mt-24">
+        <h2 className="text-2xl font-bold text-ink-900">Obras sociales y prepagas</h2>
+        <p className="mt-3 max-w-2xl text-slate-600">
+          Estas son las obras sociales y prepagas que atendemos. La cobertura puede
+          cambiar: antes de sacar turno, escribinos por WhatsApp para confirmar la tuya.
+        </p>
+        <details className="group mt-6 rounded-2xl border border-slate-100 bg-white shadow-sm">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 font-semibold text-ink-900 transition-colors hover:bg-brand-50/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-600">
+            <span>Ver el listado ({obrasSociales.length})</span>
+            <span
+              aria-hidden="true"
+              className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 transition-transform duration-200 group-open:rotate-45"
+            >
+              +
+            </span>
+          </summary>
+          <div className="px-5 pb-5">
+            <ul className="grid gap-x-6 gap-y-2 text-sm text-slate-600 sm:grid-cols-2 lg:grid-cols-3">
+              {obrasSociales.map((o) => (
+                <li key={o} className="flex gap-2">
+                  <span aria-hidden="true" className="text-brand-500">
+                    •
+                  </span>
+                  {o}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-4 text-xs text-slate-500">
+              Listado actualizado a {obrasSocialesActualizacion}.
+            </p>
+            <a
+              href={clinica.whatsappConsultaLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block text-sm font-semibold text-brand-600 hover:text-brand-700"
+            >
+              Consultar por mi cobertura →
+            </a>
+          </div>
+        </details>
       </div>
 
       <div className="mt-16 rounded-3xl bg-brand-50 px-8 py-12 text-center">
