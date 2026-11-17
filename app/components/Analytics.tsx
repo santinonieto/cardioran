@@ -2,7 +2,7 @@ import Script from "next/script";
 import SeguimientoClics from "./SeguimientoClics";
 
 /** Measurement ID de Google Analytics 4 del consultorio. */
-export const GA_MEASUREMENT_ID = "G-K7RW16SYR4";
+export const GA_MEASUREMENT_ID = "G-T0S1V1JC2L";
 
 /**
  * Google Analytics 4.
