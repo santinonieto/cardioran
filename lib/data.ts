@@ -84,8 +84,8 @@ export const clinica = {
  * `hasta` en formato ISO con zona horaria de Argentina (-03:00).
  */
 export const aviso = {
-  texto: "Este sábado 14 de noviembre atendemos de 10 a 14 hs.",
-  hasta: "2026-11-14T23:59:59-03:00",
+  texto: "Este sábado 21 de noviembre atendemos de 10 a 14 hs.",
+  hasta: "2026-11-21T23:59:59-03:00",
 };
 
 /**
