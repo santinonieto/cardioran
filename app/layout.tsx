@@ -10,8 +10,10 @@ import { clinica, doctor, servicios, testimonios } from "@/lib/data";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
-const titulo = `${clinica.nombre} · ${clinica.especialidad} · Concepción, Tucumán`;
-const descripcion = `${clinica.subtitulo} a cargo del ${doctor.nombre}, en Concepción, Tucumán. Consultas y estudios cardiológicos: ECG, ecocardiograma Doppler, Holter, MAPA y ergometría.`;
+// Título y descripción que se ven en Google. Incluyen lo que la gente busca
+// ("cardiólogo en Concepción", "Dr. Nieto") según Search Console (nov 2026).
+const titulo = `Cardiólogo en Concepción, Tucumán · Dr. Nieto | ${clinica.nombre}`;
+const descripcion = `Consultorio del ${doctor.nombre}, cardiólogo en Concepción. Electrocardiograma, ecocardiograma, Holter, MAPA y ergometría. Pedí tu turno por WhatsApp.`;
 
 export const metadata: Metadata = {
   // Necesario para que las URLs de Open Graph se resuelvan absolutas.
